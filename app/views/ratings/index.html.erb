@@ -1,0 +1,26 @@
+<div class="alert alert-success" role="alert">
+  <%= notice %>
+</div>
+
+<% content_for :title, "Ratings" %>
+
+<h1>Ratings für <%= @product.name %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Stars</th>
+      <th scope="col">Created at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ratings.each do |rating| %>
+      <tr>
+        <td><%= rating.stars %></td>
+        <td><%= l(rating.created_at, format: :short) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New rating", new_product_rating_path(@product) %>

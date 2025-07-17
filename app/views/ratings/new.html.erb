@@ -1,0 +1,11 @@
+<% content_for :title, "New rating" %>
+
+<h1>New rating</h1>
+
+<%= render "form", product: @product, rating: @rating %>
+
+<br>
+
+<div>
+  <%= link_to "Back to ratings", [@product, :ratings] %>
+</div>

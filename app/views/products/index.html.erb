@@ -10,6 +10,7 @@
       <th scope="col">Name</th>
       <th scope="col">Price</th>
       <th scope="col">Created at</th>
+      <th scope="col">Rating</th>
     </tr>
   </thead>
   <tbody>
@@ -18,6 +19,12 @@
         <td><%= product.name %></td>
         <td><%= number_to_currency(product.price) %></td>
         <td><%= l(product.created_at, format: :short) %></td>
+        <td>
+          <% average_stars = product.ratings.average(:stars) || 0 %>
+          ∅ <%= pluralize(average_stars.round(2), "star") %>
+          <br>
+          <%= link_to "#{pluralize(product.ratings.count, "rating")}", [product, :ratings], class: "text-muted" %>
+        </td>
       </tr>
     <% end %>
   </tbody>
