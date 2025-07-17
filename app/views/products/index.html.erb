@@ -10,7 +10,7 @@
       <th scope="col"><%= sort_link(@q, :name, "Name") %></th>
       <th scope="col"><%= sort_link(@q, :price, "Price") %></th>
       <th scope="col"><%= sort_link(@q, :created_at, "Created at") %></th>
-      <th scope="col">Rating</th>
+      <th scope="col"><%= sort_link(@q, :average_rating, "Rating") %></th>
     </tr>
   </thead>
   <tbody>
@@ -20,10 +20,9 @@
         <td><%= number_to_currency(product.price) %></td>
         <td><%= l(product.created_at, format: :short) %></td>
         <td>
-          <% average_stars = product.ratings.average(:stars) || 0 %>
-          ∅ <%= pluralize(average_stars.round(2), "star") %>
+          ∅ <%= pluralize(product.average_rating.round(2), "star") %>
           <br>
-          <%= link_to "#{pluralize(product.ratings.count, "rating")}", [product, :ratings], class: "text-muted" %>
+          <%= link_to "#{pluralize(product.ratings_count, "rating")}", product_ratings_path(product), class: "text-muted" %>
         </td>
       </tr>
     <% end %>
