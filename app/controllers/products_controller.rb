@@ -3,7 +3,8 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    @q = Product.ransack(ransack_params)
+    @products = @q.result
   end
 
   # GET /products/1 or /products/1.json
@@ -58,13 +59,16 @@ class ProductsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def product_params
-      params.expect(product: [ :name, :price ])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params.expect(:id))
+  end
+
+  # Only allow a list of trusted parameters through.
+  def product_params
+    params.expect(product: [ :name, :price ])
+  end
+
+  def ransack_params = params[:q] || {}
 end

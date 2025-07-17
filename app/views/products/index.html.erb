@@ -7,9 +7,9 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">Created at</th>
+      <th scope="col"><%= sort_link(@q, :name, "Name") %></th>
+      <th scope="col"><%= sort_link(@q, :price, "Price") %></th>
+      <th scope="col"><%= sort_link(@q, :created_at, "Created at") %></th>
       <th scope="col">Rating</th>
     </tr>
   </thead>
