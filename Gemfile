@@ -36,6 +36,8 @@ gem "kamal", require: false
 
 gem "ransack", "~> 4.3"
 
+gem "scenic", "~> 1.9"
+
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
 

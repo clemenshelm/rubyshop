@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @q = Product.ransack(ransack_params)
+    @q = ProductDetail.ransack(ransack_params)
     @products = @q.result
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_17_111042) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_17_130331) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -30,4 +30,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_111042) do
   end
 
   add_foreign_key "ratings", "products"
+
+  create_view "product_details", sql_definition: <<-SQL
+      SELECT products.id,
+      products.name,
+      products.price,
+      products.created_at,
+      COALESCE(avg(ratings.stars), (0)::numeric) AS average_rating,
+      count(ratings.id) AS ratings_count
+     FROM (products
+       LEFT JOIN ratings ON ((ratings.product_id = products.id)))
+    GROUP BY products.id;
+  SQL
 end
